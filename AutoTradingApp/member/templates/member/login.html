@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            <li>
+                <label for="app_key">Key : </label>
+                <input type="text" id="app_key" name="app_key" style="width:300px">
+            </li>
+            <li>
+                <label for="app_secret">Secret : </label>
+                <input type="text" id="app_secret" name="app_secret" style="width:300px">
+            </li>
+            <button type="submit">Login</button>
+        </ul>
+        
+    </form>
+</body>
+</html>
