@@ -4,19 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            changeAPISelect();
+        });
+
+        function changeAPISelect() {
+            const selValue = document.querySelector('#select-api').value;
+            const formFields = document.querySelector('#form-fields');
+            formFields.innerHTML = '';
+
+            let innerHTML = ''
+
+            switch(selValue) {
+                case 'kis':
+                    innerHTML = `
+                        <h3>한국투자증권 API</h3>
+                        <li>
+                            <label for="regID">ID: </label>
+                            <input type="text" id="regID" name="regID" style="width:300px">
+                        </li>
+                        <li>
+                            <label for="app_key">Key: </label>
+                            <input type="text" id="app_key" name="app_key" style="width:300px">
+                        </li>
+                        <li>
+                            <label for="app_secret">Secret: </label>
+                            <input type="text" id="app_secret" name="app_secret" style="width:300px">
+                        </li>
+                `;
+                    break;
+
+                case 'kiwoom':
+                    innerHTML = `
+                        <h3>키움증권 API</h3>
+                    `
+                    break;
+
+                case 'daishin':
+                    innerHTML = `
+                        <h3>대신증권 API</h3>
+                    `
+                    break;
+
+                case 'ebest':
+                    innerHTML = `
+                        <h3>이베스트투자증권 API</h3>
+                    `
+                    break;
+            }
+
+            formFields.innerHTML = innerHTML;
+        }
+    </script>
 </head>
 <body>
     <form method="post">
         {% csrf_token %}
+        <label>선택 : </label>
+        <select id='select-api' name='select-api' onchange="changeAPISelect()">
+            <option value='kis'>KIS</option>
+            <option value='kiwoom'>키움증권</option>
+            <option value='daishin'>대신증권</option>
+            <option value='ebest'>이베트스</option>
+        </select>
         <ul>
-            <li>
-                <label for="app_key">Key : </label>
-                <input type="text" id="app_key" name="app_key" style="width:300px">
-            </li>
-            <li>
-                <label for="app_secret">Secret : </label>
-                <input type="text" id="app_secret" name="app_secret" style="width:300px">
-            </li>
+            <div id='form-fields'></div>
+
             <button type="submit">Login</button>
         </ul>
         
